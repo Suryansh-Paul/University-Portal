@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Card */
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-slate-100 p-6 hover:shadow-md transition-shadow duration-200;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold px-5 py-2.5 rounded-xl transition-colors duration-200 text-sm;
+  }
+
+  /* Secondary / outline button */
+  .btn-secondary {
+    @apply bg-white hover:bg-slate-50 text-slate-700 font-semibold px-5 py-2.5 rounded-xl border border-slate-200 transition-colors duration-200 text-sm;
+  }
+
+  /* Danger button */
+  .btn-danger {
+    @apply bg-red-500 hover:bg-red-600 text-white font-semibold px-5 py-2.5 rounded-xl transition-colors duration-200 text-sm;
+  }
+
+  /* Form input */
+  .form-input {
+    @apply w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-700 placeholder-slate-400
+           focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition duration-150;
+  }
+
+  /* Form label */
+  .form-label {
+    @apply block text-sm font-semibold text-slate-600 mb-1.5;
+  }
+
+  /* Section heading */
+  .section-title {
+    @apply font-display text-2xl font-bold text-slate-800;
+  }
+
+  /* Subtle badge */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+  }
+}
+
+/* Smooth page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}

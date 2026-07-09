@@ -2,6 +2,7 @@ package com.evan.uni.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,9 +29,11 @@ public class globalexceptionhandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
 
 
+    }@ExceptionHandler(BadCredentialsException.class)
+   public ResponseEntity<Map<String,String >> handleauthenticationexceptions(BadCredentialsException exp) {
+        Map<String, String> errors = new HashMap<>();
+            errors.put(exp.getMessage(), "invalid username or password");
+
+        return new ResponseEntity<>(errors, HttpStatus.UNAUTHORIZED);
     }
-
-
-
-
 }

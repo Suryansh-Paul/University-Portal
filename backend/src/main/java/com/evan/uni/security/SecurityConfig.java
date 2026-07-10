@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -20,6 +22,8 @@ public class SecurityConfig {
 
      @Autowired
     private MyUserDetail_service myUserDetailService ;
+     @Autowired
+    private JwtFilter jwtfilter;
 
 
 
@@ -30,6 +34,7 @@ public class SecurityConfig {
                 .permitAll()
                 .anyRequest().authenticated());
         http.csrf(csrf -> csrf.disable());
+        http.addFilterBefore(jwtfilter , UsernamePasswordAuthenticationFilter.class);
            return http.build();
     }
 

@@ -1,9 +1,11 @@
 package com.evan.uni.security;
 
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -36,14 +38,35 @@ public String generateToken(String username){
 
 }
 
+ private Claims extractAllClaims(String token){
+       return Jwts.parserBuilder()
+               .setSigningKey(getkey())
+               .build()
+               .parseClaimsJws(token)
+               .getBody();
+ }
 
+ public String extractUsername(String token){
+    Claims claims = extractAllClaims(token);
+    String username = claims.getSubject();
+    return username;
+}
 
+public  Date extractExpiration(String token){
+    Claims claims = extractAllClaims(token);
+    Date expirationDate = claims.getExpiration();
+    return expirationDate;
+}
 
+public  boolean isTokenExpired(String token){
+    Date expirationDate = extractExpiration(token);
+    return expirationDate.before(new Date());
+}
 
-
-
-
-
+public boolean isTokenvalid(String token , UserDetails userDetails){
+    String username = extractUsername(token);
+   return  username.equals(userDetails.getUsername())&& !isTokenExpired(token);
+}
 
 
 

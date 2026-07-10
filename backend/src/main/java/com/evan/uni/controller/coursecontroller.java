@@ -6,6 +6,7 @@ import com.evan.uni.service.course_service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +17,12 @@ import java.util.List;
 public class coursecontroller {
     @Autowired
     private course_service service;
+    @PreAuthorize("hasAnyRole('ADMIN','STUDENT')")
      @GetMapping({"/course", "/courses"})
     public ResponseEntity<List<course>> getallcourse(){
         return new ResponseEntity<>(service.getallcourses(), HttpStatus.OK);
     }
+    @PreAuthorize("hasAnyRole('ADMIN','STUDENT')")
     @GetMapping("/courses/{id}")
     public ResponseEntity< course> getcoursebyid(@PathVariable int id) {
         course courses = service.getcoursebyid(id);
@@ -29,6 +32,7 @@ public class coursecontroller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/courses")
     public ResponseEntity<?> addcourse( @RequestBody course courses){
        try{
@@ -38,6 +42,7 @@ public class coursecontroller {
            return new ResponseEntity<>( e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
        }
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/courses/{id}")
     public ResponseEntity<String> updatecourse(@PathVariable int id, @RequestBody course courses){
          course course1= service.updatecourse(id,courses);
@@ -48,7 +53,7 @@ public class coursecontroller {
              return new ResponseEntity<>("failed to update bro ", HttpStatus.BAD_REQUEST);
          }
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/courses/{id}")
     public ResponseEntity<String> deletecourse(@PathVariable int id){
          course course1= service.getcoursebyid(id);

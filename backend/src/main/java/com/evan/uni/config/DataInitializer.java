@@ -24,6 +24,14 @@ public class DataInitializer {
                 admin.setRole("ADMIN");
                 repo.save(admin);
             }
+            if (repo.findByUsername("student1").isEmpty()) {
+                User student = new User();
+                student.setUsername("student1");
+                student.setPassword(passwordEncoder.encode("student123"));
+                student.setRole("STUDENT");
+
+               repo.save(student);
+            }
         };
 
     }

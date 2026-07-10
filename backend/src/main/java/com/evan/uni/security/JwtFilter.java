@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -30,9 +32,18 @@ public class JwtFilter extends OncePerRequestFilter{
         }
         String jwtToken = authHeader.substring(7);
         String username = service.extractUsername(jwtToken);
-        UserDetails userDetails = userDetailService.loadUserByUsername(username);
-        if(service.isTokenvalid(jwtToken , userDetails)){
+        if( username!=null&& SecurityContextHolder.getContext().getAuthentication()==null){
+            UserDetails userDetails = userDetailService.loadUserByUsername(username);
+            if (service.isTokenvalid(jwtToken, userDetails)) {
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities()
+                        );
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            }
         }
         filterChain.doFilter(request, response);
     }

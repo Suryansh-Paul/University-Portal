@@ -69,12 +69,55 @@ public class student_service {
     }
 
 
-    public student updatestudent(int id, student students) {
-        return repo.save(students);
+    public student updatestudent(int id, CreateStudentRequest request) {
+        student stud = repo.findById(id).orElse(null);
+
+        if (stud == null) {
+            return null;
+        }
+        if (!stud.getUser().getUsername().equals(request.getUsername())
+                && userRepo.findByUsername(request.getUsername()).isPresent()) {
+            throw new RuntimeException("Username already exists");
+        }
+        course course = courseRepo.findById(request.getCourseId())
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+
+        User user = stud.getUser();
+
+        user.setUsername(request.getUsername());
+
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        userRepo.save(user);
+
+        stud.setName(request.getName());
+
+        stud.setEmail(request.getEmail());
+
+        stud.setRollNumber(request.getRollNumber());
+
+        stud.setAge(request.getAge());
+
+        stud.setCourses(course);
+
+        return repo.save(stud);
     }
 
     public void deletestudent(int id) {
-         repo.deleteById(id);
+
+
+            student stud = repo.findById(id).orElse(null);
+
+            if (stud == null) {
+                return;
+            }
+
+            User user = stud.getUser();
+
+        repo.delete(stud);
+
+        userRepo.delete(user);
     }
 
 

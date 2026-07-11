@@ -47,8 +47,8 @@ public class studentcontroller {
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/students/{id}")
-    public ResponseEntity<String > updatestudents(@PathVariable int id, @Valid @RequestBody student students){
-        student stud1= service.updatestudent(id,students);
+    public ResponseEntity<String > updatestudents(@PathVariable int id, @Valid @RequestBody CreateStudentRequest request){
+        student stud1= service.updatestudent(id,request);
         if(stud1!=null){
             return new ResponseEntity<>("updated bro", HttpStatus.OK);
         }else{

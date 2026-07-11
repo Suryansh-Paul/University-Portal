@@ -30,5 +30,8 @@ public class student {
     private int age;
     @ManyToOne
     private course courses;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

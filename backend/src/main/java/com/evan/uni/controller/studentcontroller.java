@@ -1,6 +1,7 @@
 package com.evan.uni.controller;
 
 
+import com.evan.uni.dtos.CreateStudentRequest;
 import com.evan.uni.model.student;
 import com.evan.uni.service.student_service;
 import jakarta.validation.Valid;
@@ -36,9 +37,9 @@ public class studentcontroller {
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/students")
-    public ResponseEntity<?> addstudents(@Valid @RequestBody student stud){
+    public ResponseEntity<?> addstudents(@Valid @RequestBody CreateStudentRequest request){
         try{
-            student stud1= service.addstudent(stud);
+            student stud1= service.addstudent(request);
             return new ResponseEntity<>(stud1 ,HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);

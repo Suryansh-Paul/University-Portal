@@ -2,6 +2,7 @@ package com.evan.uni.controller;
 
 
 import com.evan.uni.dtos.CreateStudentRequest;
+import com.evan.uni.dtos.UpdateStudentRequest;
 import com.evan.uni.model.student;
 import com.evan.uni.service.student_service;
 import jakarta.validation.Valid;
@@ -47,13 +48,17 @@ public class studentcontroller {
     }
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/students/{id}")
-    public ResponseEntity<String > updatestudents(@PathVariable int id, @Valid @RequestBody CreateStudentRequest request){
-        student stud1= service.updatestudent(id,request);
-        if(stud1!=null){
-            return new ResponseEntity<>("updated bro", HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>("failed to update bhaijaan", HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<String> updatestudents(
+            @PathVariable int id,
+            @Valid @RequestBody UpdateStudentRequest request) {
+
+        student stud1 = service.updatestudent(id, request);
+
+        if (stud1 != null) {
+            return ResponseEntity.ok("Student updated successfully");
         }
+
+        return ResponseEntity.notFound().build();
     }
     @PreAuthorize("hasRole('ADMIN')")
      @DeleteMapping("/students/{id}")
@@ -61,9 +66,9 @@ public class studentcontroller {
         student stud1= service.getstudentbyid(id);
         if(stud1!=null){
             service.deletestudent(id);
-            return new ResponseEntity<>("deleted bro", HttpStatus.OK);
+            return new ResponseEntity<>("deleted successfully", HttpStatus.OK);
         }else{
-            return new ResponseEntity<>("failed to delete bro", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("student not found", HttpStatus.INTERNAL_SERVER_ERROR);
         }
      }
     @PreAuthorize("hasAnyRole('ADMIN','STUDENT')")

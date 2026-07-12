@@ -1,6 +1,7 @@
 package com.evan.uni.service;
 
 import com.evan.uni.dtos.CreateStudentRequest;
+import com.evan.uni.dtos.UpdateStudentRequest;
 import com.evan.uni.model.User;
 import com.evan.uni.model.course;
 import com.evan.uni.model.student;
@@ -69,7 +70,7 @@ public class student_service {
     }
 
 
-    public student updatestudent(int id, CreateStudentRequest request) {
+    public student updatestudent(int id, UpdateStudentRequest request) {
         student stud = repo.findById(id).orElse(null);
 
         if (stud == null) {
@@ -85,10 +86,15 @@ public class student_service {
 
         User user = stud.getUser();
 
+        if (user == null) {
+            throw new RuntimeException("Student has no login account.");
+        }
+
         user.setUsername(request.getUsername());
 
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-
+        if (request.getPassword() != null && !request.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
         userRepo.save(user);
 
         stud.setName(request.getName());
@@ -117,7 +123,9 @@ public class student_service {
 
         repo.delete(stud);
 
-        userRepo.delete(user);
+        if (user != null) {
+            userRepo.delete(user);
+        }
     }
 
 

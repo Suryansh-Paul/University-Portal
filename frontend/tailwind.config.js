@@ -40,6 +40,33 @@ export default {
         250: "250ms",
       },
       keyframes: {
+
+     logoGlow: {
+       "0%": {
+         filter: "hue-rotate(0deg)",
+         opacity: "1"
+       },
+
+       "25%": {
+         filter: "hue-rotate(10deg)",
+         opacity: ".95"
+       },
+
+       "50%": {
+         filter: "brightness(.85)",
+         opacity: ".9"
+       },
+
+       "75%": {
+         filter: "brightness(.65)",
+         opacity: ".95"
+       },
+
+       "100%": {
+         filter: "hue-rotate(0deg)",
+         opacity: "1"
+       }
+     },
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
@@ -61,6 +88,7 @@ export default {
         fadeIn: "fadeIn 400ms ease-out",
         fadeInUp: "fadeInUp 400ms ease-out",
         slideUpFade: "slideUpFade 250ms ease-out",
+       logoGlow: "logoGlow 5s ease-in-out infinite",
         meshDrift: "meshDrift 40s ease-in-out infinite",
       },
     },

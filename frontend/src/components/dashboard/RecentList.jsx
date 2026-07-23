@@ -10,8 +10,25 @@ import { SkeletonCardGrid } from "../ui/Skeleton";
 const RecentList = ({ title, items, isLoading, renderItem, getKey, onViewAll, emptyIcon, emptyText }) => {
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-text-primary">{title}</h3>
+      <div className="mb-6 flex items-center justify-between">
+        <h3
+          className="
+            text-2xl
+            font-extrabold
+           tracking-[-0.02em]
+            sm:text-3xl
+            bg-gradient-to-r
+            from-blue-400
+            via-indigo-300
+            to-cyan-400
+            bg-[length:200%_200%]
+            bg-clip-text
+            text-transparent
+            animate-gradientMove
+          "
+        >
+          {title}
+        </h3>
         <Button variant="ghost" size="sm" onClick={onViewAll}>
           View All
         </Button>

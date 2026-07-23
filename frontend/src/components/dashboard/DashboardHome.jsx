@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
+
 import { GraduationCap, BookOpen, Users as UsersIcon, Eye } from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
-import SectionHeader from "../common/SectionHeader";
+
 import StatCard from "./StatCard";
 import RecentList from "./RecentList";
 import Button from "../ui/Button";
@@ -41,7 +43,93 @@ const DashboardHome = () => {
 
   return (
     <section id="dashboard" className="section-container scroll-mt-24 py-16">
-      <SectionHeader title="Welcome Back 👋" subtitle="Manage your university efficiently with CampusCore." />
+     <div className="mb-14 text-center">
+
+       <div className="mb-5 flex justify-center">
+        <img
+          src="/logo.jpg"
+          alt="CampusCore Logo"
+          className="
+            h-28
+            w-28
+            rounded-full
+            object-cover
+            border-[3px]
+            border-blue-400/50
+            shadow-[0_0_35px_rgba(79,124,255,0.35)]
+            animate-logoFloat
+            select-none
+          "
+        />
+       </div>
+
+       <h1
+         className="
+           text-5xl
+           font-extrabold
+           tracking-[-0.06em]
+           bg-gradient-to-r
+           from-blue-400
+           via-indigo-300
+           to-cyan-400
+           bg-[length:200%_200%]
+           bg-clip-text
+           text-transparent
+           animate-gradientMove
+           sm:text-6xl
+         "
+       >
+         CampusCore
+       </h1>
+
+      <div className="mt-12 text-left">
+
+        <h2
+          className="
+            text-3xl
+            font-extrabold
+         tracking-[-0.02em]
+            sm:text-4xl
+            lg:text-5xl
+          "
+        >
+          <span
+            className="
+             inline-block
+              bg-gradient-to-r
+              from-blue-400
+              via-indigo-300
+              to-cyan-400
+              bg-[length:200%_200%]
+              bg-clip-text
+              text-transparent
+              animate-gradientMove
+            "
+          >
+            Welcome
+          </span>{" "}
+
+          <span className="text-text-primary">
+            back
+          </span>
+        </h2>
+
+        <p
+          className="
+            mt-5
+            max-w-2xl
+            text-base
+            font-medium
+            leading-8
+            text-text-secondary
+            sm:text-lg
+          "
+        >
+          Here's what's happening across your university portal.
+        </p>
+
+      </div>
+     </div>
 
       {students === null || courses === null ? (
         <SkeletonCardGrid count={isAdmin ? 3 : 2} />

@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import Logo from "../common/Logo";
+
 import SearchInput from "../search/SearchInput";
 import ProfileMenu from "./ProfileMenu";
 import { useAuth } from "../../hooks/useAuth";
@@ -37,7 +37,26 @@ const Navbar = () => {
           className="shrink-0 transition-opacity duration-250 hover:opacity-80"
           aria-label="Go to CampusCore dashboard"
         >
-          <Logo />
+       <div className="flex items-center gap-3">
+         <img
+           src="/logo.jpg"
+           alt="CampusCore Logo"
+           className="
+             h-10
+             w-10
+             rounded-full
+             object-cover
+             border
+             border-blue-500/20
+             shadow-lg
+             select-none
+           "
+         />
+
+         <span className="text-lg font-bold tracking-[-0.03em] text-text-primary">
+           CampusCore
+         </span>
+       </div>
         </button>
 
         {isAuthenticated && (

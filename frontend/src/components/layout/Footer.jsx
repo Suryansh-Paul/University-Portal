@@ -1,10 +1,23 @@
-import Logo from "../common/Logo";
+
 
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-background-secondary/60">
       <div className="section-container flex flex-col items-center gap-4 py-10 text-center">
-        <Logo size={24} />
+       <img
+         src="/logo.jpg"
+         alt="CampusCore Logo"
+         className="
+           h-9
+           w-9
+           rounded-full
+           object-cover
+           border
+           border-blue-500/20
+           shadow-md
+           select-none
+         "
+       />
         <p className="max-w-sm text-sm text-text-secondary">
           Modern University Management Platform
         </p>

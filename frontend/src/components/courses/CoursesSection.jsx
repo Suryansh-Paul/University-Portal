@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Eye, Pencil, Trash2, BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import SectionHeader from "../common/SectionHeader";
+
 import DataTable from "../common/DataTable";
 import Button from "../ui/Button";
 import ConfirmDialog from "../ui/ConfirmDialog";
@@ -128,17 +128,74 @@ const CoursesSection = () => {
 
   return (
     <section id="courses" className="section-container scroll-mt-24 py-16">
-      <SectionHeader
-        title="Courses"
-        subtitle="Create and manage university courses."
-        action={
-          isAdmin && (
-            <Button icon={Plus} onClick={handleCreate}>
-              Add Course
-            </Button>
-          )
-        }
-      />
+    <div className="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+
+      <div>
+
+        <h1
+          className="
+            text-4xl
+            font-extrabold
+          tracking-[-0.02em]
+            sm:text-5xl
+          "
+        >
+          <span
+            className="
+             inline-block
+              bg-gradient-to-r
+              from-blue-400
+              via-indigo-300
+              to-cyan-400
+              bg-[length:200%_200%]
+              bg-clip-text
+              text-transparent
+              animate-gradientMove
+            "
+          >
+            Courses
+          </span>
+        </h1>
+
+        <p
+          className="
+            mt-4
+            max-w-xl
+            text-sm
+            font-medium
+            leading-7
+            text-text-secondary
+            sm:text-base
+          "
+        >
+        "Create and manage university courses."
+        </p>
+
+        <div
+          className="
+            mt-5
+            h-1
+            w-20
+            rounded-full
+            bg-gradient-to-r
+            from-blue-400
+            to-cyan-400
+          "
+        />
+
+      </div>
+
+      {isAdmin && (
+        <Button
+          icon={Plus}
+          onClick={handleCreate}
+          className="shrink-0"
+        >
+          Add Course
+        </Button>
+      )}
+
+    </div>
 
       {loadError ? (
         <div className="rounded-lg border border-danger/30 bg-danger/5 p-6 text-center">

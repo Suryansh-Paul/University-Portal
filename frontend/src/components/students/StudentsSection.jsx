@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Eye, Pencil, Trash2, GraduationCap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import SectionHeader from "../common/SectionHeader";
+
 import DataTable from "../common/DataTable";
 import Button from "../ui/Button";
 import ConfirmDialog from "../ui/ConfirmDialog";
@@ -131,17 +131,74 @@ const StudentsSection = () => {
 
   return (
     <section id="students" className="section-container scroll-mt-24 py-16">
-      <SectionHeader
-        title="Students"
-        subtitle="Manage student records, enrollment and information."
-        action={
-          isAdmin && (
-            <Button icon={Plus} onClick={handleCreate}>
-              Add Student
-            </Button>
-          )
-        }
+  <div className="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+
+    <div>
+
+      <h1
+        className="
+          text-4xl
+          font-extrabold
+          tracking-[-0.02em]
+          sm:text-5xl
+        "
+      >
+        <span
+          className="
+           inline-block
+            bg-gradient-to-r
+            from-blue-400
+            via-indigo-300
+            to-cyan-400
+            bg-[length:200%_200%]
+            bg-clip-text
+            text-transparent
+            animate-gradientMove
+          "
+        >
+          Students
+        </span>
+      </h1>
+
+      <p
+        className="
+          mt-4
+          max-w-xl
+          text-sm
+          font-medium
+          leading-7
+          text-text-secondary
+          sm:text-base
+        "
+      >
+        Manage student records, enrollment and information.
+      </p>
+
+      <div
+        className="
+          mt-5
+          h-1
+          w-20
+          rounded-full
+          bg-gradient-to-r
+          from-blue-400
+          to-cyan-400
+        "
       />
+
+    </div>
+
+    {isAdmin && (
+      <Button
+        icon={Plus}
+        onClick={handleCreate}
+        className="shrink-0"
+      >
+        Add Student
+      </Button>
+    )}
+
+  </div>
 
       {loadError ? (
         <div className="rounded-lg border border-danger/30 bg-danger/5 p-6 text-center">

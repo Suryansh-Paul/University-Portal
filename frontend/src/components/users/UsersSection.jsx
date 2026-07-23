@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Plus, Pencil, Trash2, Users as UsersIcon } from "lucide-react";
-import SectionHeader from "../common/SectionHeader";
+
 import DataTable from "../common/DataTable";
 import Button from "../ui/Button";
 import Badge from "../ui/Badge";
@@ -135,15 +135,64 @@ const UsersSection = () => {
 
   return (
     <section id="users" className="section-container scroll-mt-24 py-16">
-      <SectionHeader
-        title="Users"
-        subtitle="Manage administrator and student accounts."
-        action={
-          <Button icon={Plus} onClick={handleCreate}>
-            Add User
-          </Button>
-        }
-      />
+     <div className="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+
+       <div>
+
+         <h1
+           className="
+             text-4xl
+             font-extrabold
+             tracking-[-0.02em]
+             sm:text-5xl
+           "
+         >
+           <span
+             className="
+              inline-block
+               bg-gradient-to-r
+               from-blue-400
+               via-indigo-300
+               to-cyan-400
+               bg-[length:200%_200%]
+               bg-clip-text
+               text-transparent
+               animate-gradientMove
+             "
+           >
+             Users
+           </span>
+         </h1>
+
+         <p
+           className="
+             mt-4
+             max-w-xl
+             text-sm
+             font-medium
+             leading-7
+             text-text-secondary
+             sm:text-base
+           "
+         >
+           Manage administrator and student accounts across CampusCore.
+         </p>
+
+         <div
+           className="
+             mt-5
+             h-1
+             w-20
+             rounded-full
+             bg-gradient-to-r
+             from-blue-400
+             to-cyan-400
+           "
+         />
+
+       </div>
+
+     </div>
 
       {loadError ? (
         <div className="rounded-lg border border-danger/30 bg-danger/5 p-6 text-center">
